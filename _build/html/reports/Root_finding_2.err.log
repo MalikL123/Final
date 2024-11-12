@@ -1,0 +1,107 @@
+Traceback (most recent call last):
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# prompt: show newton's method to solve this system, using linalg.solve
+
+import numpy as np
+
+def f(x):
+  """
+  The system of nonlinear equations.
+  """
+  x, y, z = x
+  return np.array([
+      x**2 + y**2 - z - 1,
+      x - y**2 + z**2 - 1,
+      x * y * z - 1
+  ])
+
+def jacobian(x):
+  """
+  The Jacobian matrix.
+  """
+  x, y, z = x
+  return np.array([
+      [2 * x, 2 * y, -1],
+      [1, -2 * y, 2 * z],
+      [y * z, x * z, x * y]
+  ])
+
+def newton_raphson(x0, tolerance=1e-6, max_iterations=100):
+  """
+  Newton-Raphson method for solving a system of nonlinear equations.
+  """
+  x = x0
+  for iter in range(max_iterations):
+    f_x = f(x)
+    print("Iteration, ", iter, " the guess is ", np.round(x,3), " with residual ", np.linalg.norm(f_x) )
+    J_x = jacobian(x)
+
+    #~~~~ What now? ####
+
+
+    #~~ Answer
+    #delta_x = np.linalg.solve(J_x, -f_x)
+    #~~~~
+    x = x + delta_x
+    if np.linalg.norm(f_x) < tolerance:
+      return x
+  return None  # No solution found within the maximum iterations
+
+# Initial guess
+x0 = np.array([2, 2, 2])
+
+# Solve the system
+solution = newton_raphson(x0)
+
+if solution is not None:
+  print("Solution found:", solution)
+else:
+  print("No solution found within the maximum iterations.")
+
+------------------
+
+----- stdout -----
+Iteration,  0  the guess is  [2 2 2]  with residual  8.660254037844387
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[3], line 52[0m
+[0;32m     49[0m x0 [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m2[39m, [38;5;241m2[39m, [38;5;241m2[39m])
+[0;32m     51[0m [38;5;66;03m# Solve the system[39;00m
+[1;32m---> 52[0m solution [38;5;241m=[39m [43mnewton_raphson[49m[43m([49m[43mx0[49m[43m)[49m
+[0;32m     54[0m [38;5;28;01mif[39;00m solution [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[0;32m     55[0m   [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mSolution found:[39m[38;5;124m"[39m, solution)
+
+Cell [1;32mIn[3], line 43[0m, in [0;36mnewton_raphson[1;34m(x0, tolerance, max_iterations)[0m
+[0;32m     35[0m J_x [38;5;241m=[39m jacobian(x)
+[0;32m     37[0m [38;5;66;03m#~~~~ What now? ####[39;00m
+[0;32m     38[0m 
+[0;32m     39[0m 
+[0;32m     40[0m [38;5;66;03m#~~ Answer[39;00m
+[0;32m     41[0m [38;5;66;03m#delta_x = np.linalg.solve(J_x, -f_x)[39;00m
+[0;32m     42[0m [38;5;66;03m#~~~~[39;00m
+[1;32m---> 43[0m x [38;5;241m=[39m x [38;5;241m+[39m [43mdelta_x[49m
+[0;32m     44[0m [38;5;28;01mif[39;00m np[38;5;241m.[39mlinalg[38;5;241m.[39mnorm(f_x) [38;5;241m<[39m tolerance:
+[0;32m     45[0m   [38;5;28;01mreturn[39;00m x
+
+[1;31mNameError[0m: name 'delta_x' is not defined
+

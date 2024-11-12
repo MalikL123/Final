@@ -1,0 +1,59 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro  # Set the introduction file as the root
+parts:
+
+- caption: Curve Fit
+  chapters:
+    - file: Curve_fit
+
+- caption: Differential Equations
+  chapters: 
+    - file: Differential_equations
+
+- caption: Finite Differences
+  chapters:
+    - file: Finite_difference
+    - file: Finite_difference_method
+
+- caption: Initial Value Problems
+  chapters:
+    - file: Initial_value_problems
+    - file: Initial_value_problems_Implicit_methods
+
+- caption: Interpolation
+  chapters:
+    - file: Interpolation
+
+- caption: Linear Systems
+  chapters:
+    - file: Linear_systems_1
+    - file: Linear_systems_2
+    - file: Linear_systems_3
+    - file: Linear_systems_4
+    - file: Linear_systems_5
+    - file: Linear_systems_6
+
+- caption: Numerical Integration
+  chapters:
+    - file: Numerical_integration
+    - file: Numerical_integration_2
+
+- caption: Optimization
+  chapters:
+    - file: Optimization_1
+    - file: Optimization_2
+    - file: Optimization_3
+
+- caption: Root Finding
+  chapters:
+    - file: Root_finding_1
+    - file: Root_finding_2
+
+- caption: Types of Errors
+  chapters:
+    - file: Roundoff_error
+    - file: True_and_approximate_error
+    - file: Truncation_error

@@ -1,0 +1,99 @@
+Traceback (most recent call last):
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\malik\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# prompt: can you make a figure that shows left, right reimann integrals? from 0 to 10, side by side figures with the points marked
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x):
+  """The function to integrate."""
+  return x**2
+
+def left_reimann(f, a, b, n):
+  """Calculates the left Riemann sum."""
+  dx = (b - a) / n
+  x_values = np.linspace(a, b - dx, n)
+  return np.sum(f(x_values) * dx)
+
+def right_reimann(f, a, b, n):
+  """Calculates the right Riemann sum."""
+  dx = (b - a) / n
+  x_values = np.linspace(a + dx, b, n)
+  return np.sum(f(x_values) * dx)
+
+# Integration interval
+a = 0
+b = 10
+# Number of subdivisions
+n = 10
+
+# Calculate left and right Riemann sums
+left_sum = left_reimann(f, a, b, n)
+right_sum = right_reimann(f, a, b, n)
+
+# Generate x and y values for the function
+x_values = np.linspace(a, b, 100)
+y_values = f(x_values)
+
+# Create the left Riemann sum figure
+plt.figure(figsize=(12, 6))
+plt.subplot(1, 2, 1)
+plt.plot(x_values, y_values, label='f(x)')
+dx = (b - a) / n
+x_rect = np.linspace(a, b - dx, n)
+for i in range(n):
+  plt.bar(x_rect[i], f(x_rect[i]), width=dx, alpha=0.5, align='edge', color='blue')
+plt.title('Left Riemann Sum')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.scatter(x_rect, f(x_rect), color='red', label='Left Riemann Points')
+plt.grid(True)  # Turn on the grid
+plt.legend()
+
+# Create the right Riemann sum figure
+plt.subplot(1, 2, 2)
+plt.plot(x_values, y_values, label='f(x)')
+x_rect = np.linspace(a + dx, b, n)
+for i in range(n):
+  plt.bar(x_rect[i]-dx, f(x_rect[i]), width=dx, alpha=0.5, align='edge', color='green')
+plt.title('Right Riemann Sum')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.scatter(x_rect, f(x_rect), color='red', label='Right Riemann Points')
+plt.grid(True)  # Turn on the grid
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+print("True integral, 1/3 x^3 = 333. Left integral, ", left_riemann_sum, "Right integral, ", right_riemann_sum)
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[1], line 67[0m
+[0;32m     64[0m plt[38;5;241m.[39mtight_layout()
+[0;32m     65[0m plt[38;5;241m.[39mshow()
+[1;32m---> 67[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mTrue integral, 1/3 x^3 = 333. Left integral, [39m[38;5;124m"[39m, [43mleft_riemann_sum[49m, [38;5;124m"[39m[38;5;124mRight integral, [39m[38;5;124m"[39m, right_riemann_sum)
+
+[1;31mNameError[0m: name 'left_riemann_sum' is not defined
+
